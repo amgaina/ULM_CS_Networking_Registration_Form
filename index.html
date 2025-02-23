@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logo_image.jpg" type="image/png">
+  <title>Computer Science Career Networking Event Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 50px;
+      min-height: 100vh;
+      background-image: url("./bg_image.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 500px;
+      text-align: center;
+      position: relative;
+    }
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #800000;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .form-container img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 25px;
+      border: 3px solid #800000;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .form-container input,
+    .form-container select {
+      width: 80%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .form-container button {
+      width: 50%;
+      padding: 14px;
+      background-color: #800000;
+      color: #fff;
+      margin-top: 30px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      position: relative;
+    }
+    .form-container button:hover {
+      background-color: #660000;
+    }
+    .form-container button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .loading-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .loading-overlay .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-top: 4px solid #800000;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <img src="./logo_image.jpg" alt="ULM Logo">
+    <h2>Computer Science Career Networking Event</h2>
+    <form id="registrationForm" method="post">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="Full Name" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="Email" required>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="Phone Number" required>
+      <label for="yearOfStudy">Year of Study</label>
+      <select id="yearOfStudy" name="Year Of Study" required>
+        <option value="">Select Year</option>
+        <option value="Freshman">Freshman</option>
+        <option value="Sophomore">Sophomore</option>
+        <option value="Junior">Junior</option>
+        <option value="Senior">Senior</option>
+      </select>
+      <label for="areasOfInterest">Fields of Interest in Computer Science <br/><span style="color: red; font-size: 12px;">Separate with commas for multiple</span></label>
+      <input type="text" id="areasOfInterest" name="Areas Of Interest" required>
+      <button type="submit" id="register_button">Register</button>
+    </form>
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const registerButton = document.getElementById('register_button');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      registerButton.innerHTML = '<span class="spinner"></span> Registering...';
+      registerButton.disabled = true;
+      loadingOverlay.classList.add('active');
+
+      const formData = new FormData(form);
+      fetch('https://script.google.com/macros/s/AKfycbxlJuynzA_Y2rc_o4fHzXxAwNa2bHu2jyhkdARiM-_L6uBpJ71mXetWlAKRjb_A8P0f/exec', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = 'success.html';
+        } else {
+          throw new Error('Network response was not ok.');
+        }
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        alert('An error occurred. Please try again.');
+      })
+      .finally(() => {
+        form.reset();
+        loadingOverlay.classList.remove('active');
+        registerButton.innerHTML = 'Register';
+        registerButton.disabled = false;
+      });
+    });
+  </script>
+</body>
+</html>

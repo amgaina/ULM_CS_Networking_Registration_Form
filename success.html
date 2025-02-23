@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logo_image.jpg" type="image/png">
+  <title>Thank You for Registering</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url("./bg_image.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
+      z-index: 1;
+    }
+
+    .thank-you-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 500px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .thank-you-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #800000;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .thank-you-container p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .thank-you-container img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid #800000;
+    }
+
+    .thank-you-container a {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #800000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .thank-you-container a:hover {
+      background-color: #660000;
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-container">
+    <img src="./logo_image.jpg" alt="ULM Logo">
+    <h1>Thank You for Registering!</h1>
+    <p>We have received your registration. See you at the event!</p>
+    <a href="index.html">Return to Home</a>
+  </div>
+</body>
+</html>
